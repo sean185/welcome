@@ -19,7 +19,13 @@ app.get('/', (req, res) => {
 
 app.post('/', function(req, res){
     console.log('POST /');
-    console.dir(req.body);
+    if (!!req.body.title) {
+        var fpath = req.body.title + '.json'
+        fs.writeFile(fpath, req.body.payload, err => {
+            if (err) throw err;
+            console.log('The file has been saved!');
+        })
+    }
     res.writeHead(200, {'Content-Type': 'text/html'});
     res.end('thanks');
 });
