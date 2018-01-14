@@ -21,7 +21,7 @@ app.post('/', function(req, res){
     console.log('POST /');
     if (!!req.body.title) {
         var fpath = req.body.title + '.json'
-        fs.writeFile(fpath, req.body.payload, err => {
+        fs.writeFile(fpath, JSON.stringify(req.body.data)+'\n', err => {
             if (err) throw err;
             console.log('The file has been saved!');
         })
