@@ -2,6 +2,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var compression = require('compression');
 var fs = require('fs');
+var path = require('path');
 var app = express();
 
 app.use(bodyParser.json({ limit: '5mb' }));
@@ -16,6 +17,8 @@ app.get('/', (req, res) => {
     console.log('GET /');
     res.render('index', { title: 'Hey', message: 'Hello there!' })
 });
+
+app.use('/assets', express.static(path.resolve(__dirname, '..', 'assets')));
 
 app.post('/', function(req, res){
     console.log('POST /');
