@@ -11,13 +11,15 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(compression());
 
-app.set('view engine', 'pug')
+// app.set('view engine', 'pug')
 
-app.get('/', (req, res) => {
-    console.log('GET /');
-    res.render('index', { title: 'Hey', message: 'Hello there!' })
-});
+// app.get('/', (req, res) => {
+//     console.log('GET /');
+//     res.sendFile(path.resolve(__dirname, '..', '..', 'welcome-ng', 'dist', 'index.html'))
+// });
 
+app.use('/', express.static(path.resolve(__dirname, '..', '..', 'welcome-ng', 'dist')));
+app.use('/react', express.static(path.resolve(__dirname, '..', '..', 'welcome-react', 'build')));
 app.use('/assets', express.static(path.resolve(__dirname, '..', 'assets')));
 
 app.post('/', function(req, res){
