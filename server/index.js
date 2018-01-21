@@ -20,6 +20,7 @@ app.use(compression());
 
 app.use('/', express.static(path.resolve(__dirname, '..', '..', 'welcome-ng', 'dist')));
 app.use('/react', express.static(path.resolve(__dirname, '..', '..', 'welcome-react', 'build')));
+app.use('/vue', express.static(path.resolve(__dirname, '..', '..', 'welcome-vue', 'dist')));
 app.use('/assets', express.static(path.resolve(__dirname, '..', 'assets')));
 
 app.post('/', function(req, res){
