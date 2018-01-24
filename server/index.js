@@ -13,15 +13,17 @@ app.use(compression());
 
 // app.set('view engine', 'pug')
 
-// app.get('/', (req, res) => {
-//     console.log('GET /');
-//     res.sendFile(path.resolve(__dirname, '..', '..', 'welcome-ng', 'dist', 'index.html'))
-// });
+app.use('/assets', express.static(path.join(__dirname, '..', 'assets')));
 
-app.use('/', express.static(path.resolve(__dirname, '..', '..', 'welcome-ng', 'dist')));
-app.use('/react', express.static(path.resolve(__dirname, '..', '..', 'welcome-react', 'build')));
-app.use('/vue', express.static(path.resolve(__dirname, '..', '..', 'welcome-vue', 'dist')));
-app.use('/assets', express.static(path.resolve(__dirname, '..', 'assets')));
+app.use('/react', express.static(path.join(__dirname, '..', '..', 'welcome-react', 'build')));
+app.use('/vue', express.static(path.join(__dirname, '..', '..', 'welcome-vue', 'dist')));
+
+// Setup for Angular2 app
+app.use('/', express.static(path.join(__dirname, '..', '..', 'welcome-ng', 'dist')));
+app.get('/*', (req, res) => {
+    console.log('GET /');
+    res.sendFile(path.join(__dirname, '..', '..', 'welcome-ng', 'dist', 'index.html'))
+});
 
 app.post('/', function(req, res){
     console.log('POST /');
